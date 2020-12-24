@@ -20,7 +20,7 @@
 	
 	<select id="getUser" parameterType="user" resultType="user">
 		select id,
-		password, name, role
+		password, name, role,profile
 		from users
 		where id=#{id}
 	</select>
