@@ -5,6 +5,7 @@ import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.ComponentScan;
 import org.springframework.context.annotation.Configuration;
 import org.springframework.context.support.ResourceBundleMessageSource;
+import org.springframework.web.multipart.commons.CommonsMultipartResolver;
 import org.springframework.web.servlet.ViewResolver;
 import org.springframework.web.servlet.config.annotation.DefaultServletHandlerConfigurer;
 import org.springframework.web.servlet.config.annotation.EnableWebMvc;
@@ -19,7 +20,7 @@ import co.company.spring.common.AuthCheckInterceptor;
 
 @Configuration//config파일에서 bean등록
 @ComponentScan(basePackages="co.company.spring")
-@EnableWebMvc //(annotation-drive) --xml기반 모든설정 어쩌구 웅앵
+@EnableWebMvc //(annotation-drive) --MessageConvertor 빈등록
 public class MvcConfiguration implements WebMvcConfigurer {
 
 	@Bean
@@ -33,17 +34,17 @@ public class MvcConfiguration implements WebMvcConfigurer {
 	
 	
 	
-	
-	
 	@Override
 	public void configureDefaultServletHandling(
 			DefaultServletHandlerConfigurer configurer) {
 		configurer.enable();
 	}
     
+	
 	@Override
 	public void addResourceHandlers(ResourceHandlerRegistry registry) {
 		registry.addResourceHandler("/resources/**").addResourceLocations("/resources/");
+		registry.addResourceHandler("/images/**").addResourceLocations("/images/");
 	}
 	
 	
@@ -94,6 +95,15 @@ public class MvcConfiguration implements WebMvcConfigurer {
 	public AuthCheckInterceptor authCheckInterceptor() {
 		return new AuthCheckInterceptor();
 	}
+	
+	//파일업로드
+	@Bean CommonsMultipartResolver multipartResolver() {
+		CommonsMultipartResolver multi = new CommonsMultipartResolver();
+		multi.setMaxUploadSize(1024*10000);//byte단위라 계산해서 넣어주렴
+		return multi;
+		
+	}
+	
 	
 
 	

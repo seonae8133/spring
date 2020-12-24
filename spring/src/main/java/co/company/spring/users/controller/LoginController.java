@@ -1,4 +1,4 @@
-package co.company.spring.controller;
+package co.company.spring.users.controller;
 
 import javax.servlet.http.HttpSession;
 

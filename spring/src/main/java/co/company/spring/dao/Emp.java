@@ -2,6 +2,8 @@ package co.company.spring.dao;
 
 import java.sql.Date;
 
+import org.springframework.format.annotation.DateTimeFormat;
+
 import com.fasterxml.jackson.annotation.JsonFormat;
 import com.fasterxml.jackson.annotation.JsonFormat.Shape;
 import com.fasterxml.jackson.annotation.JsonIgnore;
@@ -17,6 +19,7 @@ public class Emp {//	<setting name="mapUnderscoreToCamelCase" value="true" />
 	String lastName;
 	String email;
 	//@JsonFormat(pattern="yyyy/MM/dd/HH:mm:ss")
+	@DateTimeFormat(pattern="YYYY-MM-DD")
 	@JsonFormat(shape =Shape.STRING)
 	Date hireDate;	
 	String jobId;	
