@@ -19,25 +19,26 @@ import co.company.spring.dao.Emp;
 import co.company.spring.dao.EmpMapper;
 import co.company.spring.dao.EmpSearch;
 import co.company.spring.dao.Jobs;
+import co.company.spring.emp.service.EmpService;
 
 @Controller
 public class EmpController {
-	@Autowired EmpMapper dao;
+	@Autowired EmpService service;//serviceImpl 클래스를 받아옴
 	
 	@RequestMapping("/ajax/jobSelect")
 	@ResponseBody // json구조로 변환시켜 달라는 어노테이션
 	public List<Jobs> jobSelect() {
-		return dao.jobSelect(); 
+		return service.jobSelect(); 
 	}
 	
 	@ModelAttribute("jobs")
 	public List<Jobs> jobs() {
-		return dao.jobSelect();
+		return service.jobSelect();
 	}
 	
 	@ModelAttribute("departments")
 	public List<Departments> depts() {
-		return dao.departSelect();
+		return service.departSelect();
 	}
 	
 	@RequestMapping(value = "/empSelect",method = RequestMethod.GET)//단순조회
@@ -45,22 +46,22 @@ public class EmpController {
 		ModelAndView mav = new ModelAndView();
 		
 		//전체 사원정보 조회해서 보냄
-		mav.addObject("list", dao.getEmpList(emp));
+		mav.addObject("list", service.getEmpList(emp));
 		mav.setViewName("emp/select");
 		return mav; //return할때 아무것도 없으면 default - forword임
 	}
 	
 	@GetMapping("/empInsertForm") //등록페이지로 가기
 	public String insertForm(Model model, Emp emp) {
-//		model.addAttribute("jobs",dao.jobSelect());
-//		model.addAttribute("departments",dao.departSelect());
+//		model.addAttribute("jobs",service.jobSelect());
+//		model.addAttribute("departments",service.departSelect());
 		return "emp/insert";
 	}
 	
 	//--업데이트--
 	@GetMapping("/empUpdateForm") //등록페이지로 가기
 	public String updateForm(Model model, Emp emp) {
-		model.addAttribute("emp",dao.getEmp(emp));
+		model.addAttribute("emp",service.getEmp(emp));
 //		model.addAttribute("jobs",dao.jobSelect());
 //		model.addAttribute("departments",dao.departSelect());
 		return "emp/insert";
@@ -75,9 +76,9 @@ public class EmpController {
 			return "emp/insert";
 		}
 		if(emp.getEmployeeId() == null) {
-			dao.insertEmp(emp);
+			service.insertEmp(emp);
 		} else {
-			dao.updateEmp(emp);		
+			service.updateEmp(emp);		
 		}
 	
 		System.out.println(emp);

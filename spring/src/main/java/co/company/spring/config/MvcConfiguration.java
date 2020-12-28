@@ -4,6 +4,7 @@ import org.springframework.context.MessageSource;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.ComponentScan;
 import org.springframework.context.annotation.Configuration;
+import org.springframework.context.annotation.EnableAspectJAutoProxy;
 import org.springframework.context.support.ResourceBundleMessageSource;
 import org.springframework.web.multipart.commons.CommonsMultipartResolver;
 import org.springframework.web.servlet.ViewResolver;
@@ -19,6 +20,7 @@ import org.springframework.web.servlet.view.InternalResourceViewResolver;
 import co.company.spring.common.AuthCheckInterceptor;
 
 @Configuration//config파일에서 bean등록
+@EnableAspectJAutoProxy
 @ComponentScan(basePackages="co.company.spring")
 @EnableWebMvc //(annotation-drive) --MessageConvertor 빈등록
 public class MvcConfiguration implements WebMvcConfigurer {
