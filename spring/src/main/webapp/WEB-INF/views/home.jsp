@@ -9,6 +9,8 @@
     </head>
     <body>
         <h1>홈 화면 페이지</h1>
-       
+  이멜     ${kemail}
+   이름     ${kname}
+    몰라     ${kimage}
     </body>
 </html>

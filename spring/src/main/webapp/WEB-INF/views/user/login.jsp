@@ -12,6 +12,7 @@
 		<input name="id" placeholder="id"><br>
 		<input name="password" placeholder="password"><br>
 		<button>로그인</button>
+		<a href="${kakao_url}">카카오로그인</a>
 	</form>
 </body>
 </html>
